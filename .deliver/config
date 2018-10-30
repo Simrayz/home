@@ -16,3 +16,19 @@ pre_erlang_get_and_update_deps() {
     "
   fi
 }
+
+pre_erlang_clean_compile() {
+  status "Building static files"
+  __sync_remote "
+    [ -f ~/.profile ] && source ~/.profile
+    set -e
+    cd '$BUILD_AT'
+    mkdir -p priv/static
+  "
+
+  status "Running phoenix.digest"
+  __sync_remote "
+    cd '$BUILD_AT'
+    MIX_ENV="PRODUCTION" mix phx.digest
+  "
+}
