@@ -29,6 +29,6 @@ pre_erlang_clean_compile() {
   status "Running phoenix.digest"
   __sync_remote "
     cd '$BUILD_AT'
-    MIX_ENV="PRODUCTION" mix phx.digest
+    MIX_ENV="prod" mix phx.digest
   "
 }
